@@ -35,9 +35,15 @@ public class ControlInventario {
         int diferencia = tipo.equals("Entrada") ? cantidad : -cantidad;
         int nuevoStock = producto.consultarStock() + diferencia;
 
-        if (nuevoStock < 0) {
-            throw new IllegalArgumentException("Stock insuficiente");
-        }
+        
+if (nuevoStock < 0) {
+    throw new StockInsuficienteException(
+        "Stock insuficiente. Disponible: "
+        + producto.consultarStock()
+        + ", solicitado: " + cantidad
+    );
+}
+
 
         MovimientoStock movimiento = new MovimientoStock(
             movimientos.size() + 1,
