@@ -85,14 +85,23 @@ try (java.sql.Connection conexion = ConexionBD.conectar();
         ControlInventario control = new ControlInventario();
 
         int opcion = 0;
+        
+String[] opcionesMenu = {
+    "1. Consultar producto",
+    "2. Registrar entrada",
+    "3. Registrar salida",
+    "4. Consultar movimientos",
+    "5. Salir"
+};
+
 
         do {
             System.out.println("\n=== SISTEMA DE INVENTARIO ===");
-            System.out.println("1. Consultar producto");
-            System.out.println("2. Registrar entrada");
-            System.out.println("3. Registrar salida");
-            System.out.println("4. Consultar movimientos");
-            System.out.println("5. Salir");
+
+         for (String opcionMenu : opcionesMenu) {
+            System.out.println(opcionMenu);
+}
+
             System.out.print("Seleccione una opcion: ");
 
             try {

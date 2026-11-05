@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class MovimientoDAO {
 
+public class MovimientoDAO implements MovimientoRepository {
+
+@Override
     public void guardarMovimiento(MovimientoStock movimiento)
             throws SQLException {
 

@@ -13,6 +13,15 @@ public class ConexionBD {
     private static final String USUARIO = "root";
     private static final String CONTRASENA = "";
 
+    private static final ConexionBD INSTANCIA = new ConexionBD();
+
+    private ConexionBD() {
+    }
+
+    public static ConexionBD getInstancia() {
+        return INSTANCIA;
+    }
+
     public static Connection conectar() throws SQLException {
         return DriverManager.getConnection(
             URL, USUARIO, CONTRASENA
