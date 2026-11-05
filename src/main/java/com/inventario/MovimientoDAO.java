@@ -6,21 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-
 public class MovimientoDAO implements MovimientoRepository {
 
-@Override
-    public void guardarMovimiento(MovimientoStock movimiento)
-            throws SQLException {
+    @Override
+    public void guardarMovimiento(
+            Connection conexion,
+            MovimientoStock movimiento) throws SQLException {
 
         String sql = "INSERT INTO movimiento_stock "
                 + "(fecha, tipo_movimiento, cantidad, "
                 + "id_producto, id_usuario) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conexion = ConexionBD.conectar();
-             PreparedStatement consulta =
-                     conexion.prepareStatement(sql)) {
+        try (PreparedStatement consulta =
+                conexion.prepareStatement(sql)) {
 
             consulta.setTimestamp(1,
                     Timestamp.valueOf(movimiento.getFecha()));

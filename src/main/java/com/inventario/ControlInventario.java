@@ -12,6 +12,7 @@ import java.util.List;
 public class ControlInventario {
 
     private List<MovimientoStock> movimientos = new ArrayList<>();
+    private MovimientoRepository repositorio = new MovimientoDAO();
 
     public void registrarEntrada(Producto producto, Usuario usuario,
                                 int cantidad) throws SQLException {
@@ -72,20 +73,7 @@ if (nuevoStock < 0) {
                     }
                 }
 
-                String insertar = "INSERT INTO movimiento_stock "
-                        + "(fecha, tipo_movimiento, cantidad, "
-                        + "id_producto, id_usuario) VALUES (?, ?, ?, ?, ?)";
-
-                try (PreparedStatement consulta =
-                        conexion.prepareStatement(insertar)) {
-
-                    consulta.setObject(1, movimiento.getFecha());
-                    consulta.setString(2, movimiento.getTipoMovimiento());
-                    consulta.setInt(3, movimiento.getCantidad());
-                    consulta.setInt(4, movimiento.getIdProducto());
-                    consulta.setInt(5, movimiento.getIdUsuario());
-                    consulta.executeUpdate();
-                }
+repositorio.guardarMovimiento(conexion, movimiento);
 
                 conexion.commit();
 
